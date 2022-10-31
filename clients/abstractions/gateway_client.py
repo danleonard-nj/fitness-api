@@ -1,19 +1,13 @@
-from clients.identity_client import IdentityClient
-from framework.clients.cache_client import CacheClientAsync
 from framework.clients.http_client import HttpClient
-from framework.configuration.configuration import Configuration
 from framework.logger.providers import get_logger
 
 logger = get_logger(__name__)
 
 
 class GatewayClient:
-    def __init__(self, container, cache_key: str, client_name: str, client_scope: str):
-        self.configuration = container.resolve(Configuration)
-        self.__identity_client: IdentityClient = container.resolve(
-            IdentityClient)
-        self.__cache_client: CacheClientAsync = container.resolve(
-            CacheClientAsync)
+    def __init__(self, configuration, identity_client, cache_client, cache_key: str, client_name: str, client_scope: str):
+        self.__identity_client = identity_client
+        self.__cache_client = cache_client
 
         self.http_client: HttpClient = HttpClient()
 
@@ -21,7 +15,7 @@ class GatewayClient:
         self.client_name = client_name
         self.client_scope = client_scope
 
-        self.base_url = self.configuration.gateway.get('base_url')
+        self.base_url = configuration.gateway.get('base_url')
 
     async def __get_token(
         self

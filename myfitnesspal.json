@@ -1,0 +1,129 @@
+[
+  {
+    "domain": "www.myfitnesspal.com",
+    "httpOnly": true,
+    "name": "__Secure-next-auth.callback-url",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": true,
+    "value": "https%3A%2F%2Fwww.myfitnesspal.com%2Faccount%2Flogin"
+  },
+  {
+    "domain": "www.myfitnesspal.com",
+    "expiry": 1699506352,
+    "httpOnly": false,
+    "name": "p",
+    "path": "/",
+    "secure": true,
+    "value": "zsTFZeKlhb4HiwPYmET6kTjJ"
+  },
+  {
+    "domain": ".myfitnesspal.com",
+    "expiry": 1696482352,
+    "httpOnly": false,
+    "name": "ajs_anonymous_id",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "7cfb32ef-2b8b-43aa-a360-c83fa30b09a6"
+  },
+  {
+    "domain": ".myfitnesspal.com",
+    "expiry": 1664946408,
+    "httpOnly": false,
+    "name": "_gat_UA-273418-118",
+    "path": "/",
+    "secure": false,
+    "value": "1"
+  },
+  {
+    "domain": "www.myfitnesspal.com",
+    "expiry": 1667538352,
+    "httpOnly": true,
+    "name": "__Secure-next-auth.session-token",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": true,
+    "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..CHlmba1wpwbxAz0s.ednz-0SdpxEv9ElBudfbNcF2lnQ1XtY6SN4p08Pj3xQitlltaDzt-gbPl21TJlv1zNXdcoWaCw3DpKwUVLY2-Gbg0hvWOsZSLgjg6Rhw83JKLhZUHG3LqpkRKZm1POx0Mg2eXANv47EvfvhG4A94oEGpzGkV4WtjqcmnyMf7nCev4F9GU0nNqWaYMISwfyYCV8q1__h2thf229zWYKWgVXL1kZnr-glIZp7kSJ6wze6XlzQogz8PIyDT4PytcH2NHlsLb2_KUdA-BLm9v04Dr_Kr5jtiy3KQVSDi8kmWRItddprLhtBgJt6vezoCB3OMlEYPJ3RPg1G9SlT_Ag_TErNzHq4iZEDt1AHHTqsZ--a5V_5mZhqq3IN8YgH9hnzDILjAERdZ0q-tGe5zdDqw8tjDhPyK2lyX9hq1GAe2aBlEbipUsqlJIs9UOxij7NIMAogocyDSJAm6_m9_DGn1dQl4rzSB88sP-YT-V8Na05ckxevaMGJuN1uhWXXdRqHVpp0UD8f1eq1H95tF777FRjsF56lf1cNsQhrOR4cD3OqDV7t2wqJgMdiM9hktC6dLIoATsb6NVJv1vc5zfjVIlZtyr2ANaSjuWZkgWaj24O4QHWYUW6_piP0uE8xKEdDKuf3frJnG3Ng-mjVclUvHZu5Q_Vjh4K3P9GlGxhswn3b4Bj1RwNZ3yR0VceTnq5ZxGWUYFSqnYzz-Q4LNUoOkfNz4f9xooQcKYecVpZG1l_DqQz8duJFSjpZq_QhJZLnF_kMAjCSUD_uyvv1RKC2bjCCkelLMGLHVsTwu-nGmGXpe6pVKe9iv87pSruWEZ64AFsHwbym2s7xsfRonaBIDHb5FF-qi8hjr7Gky4ZVtUTM12AYsDm4ewBSG7c_uzb6yBY0I2dCCI62rzZp9noE6JIB3G9dcQl7b9iiAzXBPUQx-RM1NppKsKfxc1qMRaZhXoJoFhzQr835hx8J6xV9GPaLnup8wISjWwXZbZiU_alghLSUes2lfZCT7wgMayEKIAg.VDWL0Lu-CXzsb1XBZscPXQ"
+  },
+  {
+    "domain": ".myfitnesspal.com",
+    "expiry": 1665032752,
+    "httpOnly": false,
+    "name": "_gid",
+    "path": "/",
+    "secure": false,
+    "value": "GA1.2.1680331658.1664946349"
+  },
+  {
+    "domain": "www.myfitnesspal.com",
+    "expiry": 1664947250,
+    "httpOnly": false,
+    "name": "_dd_s",
+    "path": "/",
+    "sameSite": "Strict",
+    "secure": false,
+    "value": "logs=1&id=f97b76d2-2cab-4645-a3a7-9a685b121fd6&created=1664946343234&expire=1664947250836&rum=2"
+  },
+  {
+    "domain": ".myfitnesspal.com",
+    "expiry": 1699506352,
+    "httpOnly": false,
+    "name": "_ga",
+    "path": "/",
+    "secure": false,
+    "value": "GA1.2.303420208.1664946349"
+  },
+  {
+    "domain": ".myfitnesspal.com",
+    "expiry": 1672722347,
+    "httpOnly": false,
+    "name": "_gcl_au",
+    "path": "/",
+    "secure": false,
+    "value": "1.1.1067524628.1664946348"
+  },
+  {
+    "domain": "www.myfitnesspal.com",
+    "httpOnly": true,
+    "name": "__Host-next-auth.csrf-token",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": true,
+    "value": "220b9a67d921c0060b587ee4fa31662b4e7a7fb83567b22ac404568be3cbe467%7C62eb64f468ad88d3adc940f5071218b5df2a4229161b3c95ab72973993a3311a"
+  },
+  {
+    "domain": ".myfitnesspal.com",
+    "httpOnly": false,
+    "name": "notice_behavior",
+    "path": "/",
+    "sameSite": "None",
+    "secure": true,
+    "value": "implied,eu"
+  },
+  {
+    "domain": "www.myfitnesspal.com",
+    "expiry": 1667538352,
+    "httpOnly": false,
+    "name": "last_login_date",
+    "path": "/",
+    "secure": true,
+    "value": "2022-10-04"
+  },
+  {
+    "domain": "www.myfitnesspal.com",
+    "httpOnly": true,
+    "name": "_mfp_session",
+    "path": "/",
+    "secure": true,
+    "value": "SUYyNDBJTHNWZHFIelR1VThmV0lSRG95cXUwdUtqOGxvOU1oMEVaRnlteGZxdzZ6eGUyeGdLTUdySjIzRTlmQXFUMzZFQ3F2U0J2bnhic3V2SElidXlnY0VwZlJHY0d5R09kWkZzT1lXelFhV2daQnhyT0c4TkI5V2I1aUZ4d2gzcHh5RTUrVENya1M2cFZWRC9NV1RGMnYvZWVsU2pDMzE0L0cycm1NNktaTzdMNWdpL01lYmtqZWtYNmxmSFM5LS1kMmRHVCtaNzVCUS9tVE5tckxHWmVRPT0%3D--c25ce55d7fd332d310a23f60163685755b2b46fa"
+  },
+  {
+    "domain": "www.myfitnesspal.com",
+    "httpOnly": false,
+    "name": "split-id",
+    "path": "/",
+    "secure": false,
+    "value": "a968ef8f-1f24-4867-9136-e471b693c337"
+  }
+]

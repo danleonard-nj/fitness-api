@@ -11,8 +11,10 @@ logger = get_logger(__name__)
 
 
 class FitIndexClient:
-    def __init__(self, container: None):
-        configuration = container.resolve(Configuration)
+    def __init__(
+        self,
+        configuration: Configuration
+    ):
         self.__base_url = configuration.fitindex.get('base_url')
 
     async def get_measurement_data(

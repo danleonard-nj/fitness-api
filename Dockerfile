@@ -1,4 +1,4 @@
-FROM azureks.azurecr.io/base/pybase:v1.2 as base
+FROM azureks.azurecr.io/base/pybase:v2 as base
 
 WORKDIR /app
 

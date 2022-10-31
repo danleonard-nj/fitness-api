@@ -8,7 +8,7 @@ from domain.exceptions import FitIndexRecordException
 from domain.feature import FeatureKey
 from domain.fitindex import FitIndexMeasurement, MeasurementSummary
 from domain.mongo import TimestampRangeFilter
-from framework.clients.feature_client import FeatureClientAsync
+from clients.feature_client import FeatureClientAsync
 from framework.concurrency.concurrency import DeferredTasks
 from framework.logger.providers import get_logger
 from framework.utilities.pinq import first
@@ -17,15 +17,20 @@ logger = get_logger(__name__)
 
 
 class FitIndexService:
-    def __init__(self, container=None):
-        self.__fitindex_client: FitIndexClient = container.resolve(
-            FitIndexClient)
-        self.__email_client: EmailGatewayClient = container.resolve(
-            EmailGatewayClient)
-        self.__fitindex_repository: FitIndexRepository = container.resolve(
-            FitIndexRepository)
-        self.__feature_client: FeatureClientAsync = container.resolve(
-            FeatureClientAsync)
+    def __init__(
+        self,
+        fitindex_client: FitIndexClient,
+        email_client: EmailGatewayClient,
+        fitindex_repository: FitIndexRepository,
+        feature_client: FeatureClientAsync
+    ):
+        self.__fitindex_client = fitindex_client
+        self.__email_client = email_client
+        self.__fitindex_repository = fitindex_repository
+        self.__feature_client = feature_client
+
+    def hello_world(self):
+        logger.info('Hello world!')
 
     async def sync(
         self, days_back=None

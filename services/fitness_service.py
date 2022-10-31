@@ -6,7 +6,7 @@ from data.fitness_repository import FitnessConfigRepository
 from dateutil import parser
 from domain.fitness import FitnessConfig, FitnessData
 from domain.google import GoogleFitRequest
-from framework.clients.cache_client import CacheClientAsync
+from clients.cache_client import CacheClientAsync
 from framework.concurrency import DeferredTasks
 from framework.crypto.hashing import sha256
 from framework.logger.providers import get_logger
@@ -43,17 +43,19 @@ class CalorieDeficitResult(Serializable):
 
 
 class FitnessService:
-    def __init__(self, container):
-        self.__mfp_service: MyFitnessPalService = container.resolve(
-            MyFitnessPalService)
-        self.__fitindex_service: FitIndexService = container.resolve(
-            FitIndexService)
-        self.__fit_service: GoogleFitService = container.resolve(
-            GoogleFitService)
-        self.__config_repository: FitnessConfigRepository = container.resolve(
-            FitnessConfigRepository)
-        self.__cache_client: CacheClientAsync = container.resolve(
-            CacheClientAsync)
+    def __init__(
+        self,
+        mfp_service: MyFitnessPalService,
+        fitindex_service: FitIndexService,
+        fit_service: GoogleFitService,
+        config_repository: FitnessConfigRepository,
+        cache_client: CacheClientAsync
+    ):
+        self.__mfp_service = mfp_service
+        self.__fitindex_service = fitindex_service
+        self.__fit_service = fit_service
+        self.__config_repository = config_repository
+        self.__cache_client = cache_client
 
     def get_date_hash_key(self, date_str):
         date = self.truncate_date(date_str)

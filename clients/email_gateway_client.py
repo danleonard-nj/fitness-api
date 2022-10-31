@@ -1,17 +1,27 @@
 from typing import Any, Dict, List
 
 from domain.auth import ClientScope
+from clients.cache_client import CacheClientAsync
+from framework.configuration.configuration import Configuration
 from framework.logger.providers import get_logger
 
 from clients.abstractions.gateway_client import GatewayClient
+from clients.identity_client import IdentityClient
 
 logger = get_logger(__name__)
 
 
 class EmailGatewayClient(GatewayClient):
-    def __init__(self, container):
+    def __init__(
+        self,
+        configuration: Configuration,
+        identity_client: IdentityClient,
+        cache_client: CacheClientAsync
+    ):
         super().__init__(
-            container=container,
+            identity_client=identity_client,
+            configuration=configuration,
+            cache_client=cache_client,
             cache_key=self.__class__.__name__,
             client_name='kube-tools-api',
             client_scope=ClientScope.EMAIL_GATEWAY_API)

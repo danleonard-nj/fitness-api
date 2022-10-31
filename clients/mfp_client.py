@@ -16,7 +16,7 @@ logger = get_logger(__name__)
 
 
 class MyFitnessPalClient:
-    def __init__(self, container):
+    def __init__(self):
         self.base_url = MyFitnessPal.BaseUrl
         self.cookies = self.get_credentials()
 

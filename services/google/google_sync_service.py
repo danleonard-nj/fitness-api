@@ -10,9 +10,11 @@ logger = get_logger(__name__)
 
 
 class GoogleFitSyncService:
-    def __init__(self, container):
-        self.__google_fit_service: GoogleFitService = container.resolve(
-            GoogleFitService)
+    def __init__(
+        self,
+        google_fit_service: GoogleFitService
+    ):
+        self.__google_fit_service = google_fit_service
 
     def __get_sync_range(
         self,

@@ -1,3 +1,5 @@
+from unittest.mock import MagicMock
+import uuid
 from clients.email_gateway_client import EmailGatewayClient
 from clients.fitindex_client import FitIndexClient
 from clients.google_fit_client import GoogleFitClient
@@ -14,11 +16,7 @@ from domain.auth import AdRole, AuthScheme
 from framework.abstractions.abstract_request import RequestContextProvider
 from framework.auth.azure import AzureAd
 from framework.auth.configuration import AzureAdConfiguration
-from framework.clients.cache_client import CacheClientAsync
-from framework.clients.feature_client import FeatureClientAsync
 from framework.configuration.configuration import Configuration
-from framework.dependency_injection.container import Container
-from framework.dependency_injection.provider import ProviderBase
 from quart import Quart
 from services.fitindex.fitindex_service import FitIndexService
 from services.fitness_service import FitnessService
@@ -26,6 +24,17 @@ from services.google.google_auth_service import GoogleAuthService
 from services.google.google_fit_service import GoogleFitService
 from services.google.google_sync_service import GoogleFitSyncService
 from services.mfp.mfp_service import MyFitnessPalService
+from clients.cache_client import CacheClientAsync
+from clients.feature_client import FeatureClientAsync
+from framework.logger import get_logger
+
+from framework.di.static_provider import ProviderBase
+from framework.di.service_collection import ServiceCollection
+
+
+from motor.motor_asyncio import AsyncIOMotorClient
+
+logger = get_logger(__name__)
 
 
 def configure_azure_ad(container):
@@ -58,24 +67,40 @@ def configure_azure_ad(container):
     return azure_ad
 
 
+def get_client(provider):
+    configuration = provider.resolve(Configuration)
+    connection_string = configuration.mongo.get('connection_string')
+
+    logger.info(f'Built client')
+    client = AsyncIOMotorClient(connection_string)
+    client.id = str(uuid.uuid4())
+    logger.info(f'Client ID: {client.id}')
+    return client
+
+
 class ContainerProvider(ProviderBase):
     @classmethod
     def configure_container(cls):
-        container = Container()
+        container = ServiceCollection()
         container.add_singleton(Configuration)
 
-        container.add_factory_singleton(
-            _type=AzureAd,
+        container.add_singleton(
+            dependency_type=AzureAd,
             factory=configure_azure_ad)
+
+        container.add_singleton(
+            dependency_type=AsyncIOMotorClient,
+            factory=get_client)
 
         # Framework
         container.add_singleton(CacheClientAsync)
+        container.add_singleton(FitnessConfigRepository)
         container.add_singleton(FeatureClientAsync)
 
         # Clients
         container.add_singleton(EmailGatewayClient)
         container.add_singleton(FitIndexClient)
-        container.add_singleton(GoogleFitClient)
+        container.add_transient(GoogleFitClient)
         container.add_singleton(IdentityClient)
         container.add_singleton(MyFitnessPalClient)
 
@@ -86,17 +111,16 @@ class ContainerProvider(ProviderBase):
         container.add_singleton(FitIndexRepository)
         container.add_singleton(GoogleAuthRepository)
         container.add_singleton(MyFitnessPalRepository)
-        container.add_singleton(FitnessConfigRepository)
 
         # Services
-        container.add_singleton(GoogleAuthService)
-        container.add_singleton(GoogleFitService)
-        container.add_singleton(FitIndexService)
-        container.add_singleton(FitnessService)
-        container.add_singleton(MyFitnessPalService)
-        container.add_singleton(GoogleFitSyncService)
+        container.add_transient(GoogleAuthService)
+        container.add_transient(GoogleFitService)
+        container.add_transient(FitIndexService)
+        container.add_transient(FitnessService)
+        container.add_transient(MyFitnessPalService)
+        container.add_transient(GoogleFitSyncService)
 
-        return container.build()
+        return container
 
 
 def add_container_hook(app: Quart):

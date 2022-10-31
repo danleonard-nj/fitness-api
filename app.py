@@ -3,6 +3,7 @@ from framework.logger.providers import get_logger
 from framework.serialization.serializer import configure_serializer
 from framework.swagger.quart.swagger import Swagger
 from framework.utilities.object_utils import getattr_or_none
+from framework.dependency_injection.provider import InternalProvider
 from quart import Quart
 
 from routes.fitindex import fitindex_bp
@@ -28,6 +29,7 @@ app.register_blueprint(google_auth_bp)
 app.register_blueprint(health_bp)
 
 ContainerProvider.initialize_provider()
+InternalProvider.bind(ContainerProvider.get_service_provider())
 
 
 @app.before_serving

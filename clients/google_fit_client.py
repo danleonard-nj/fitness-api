@@ -1,4 +1,5 @@
 import httpx
+from clients.identity_client import IdentityClient
 from domain.exceptions import (GoogleFitAuthenticationException,
                                GoogleFitRequestFailedException)
 from domain.google import GoogleFit
@@ -10,9 +11,16 @@ logger = get_logger(__name__)
 
 
 class GoogleFitClient:
-    def __init__(self, container):
-        self.__auth_service: GoogleAuthService = container.resolve(
-            GoogleAuthService)
+    def __init__(
+        self,
+        auth_service: GoogleAuthService,
+        identity_client: IdentityClient
+    ):
+        self.__auth_service = auth_service
+        self.__identity_client = identity_client
+
+        self.__identity_client.get_client(
+            client_name='kube-tools-api')
 
     async def __get_auth_headers(
         self

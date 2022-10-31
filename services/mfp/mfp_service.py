@@ -9,7 +9,7 @@ from domain.feature import FeatureKey
 from domain.mfp import (DailySummaryRecord, DiaryRecord, MfpDateUtility,
                         MyFitnessPalSyncResult)
 from domain.mongo import TimestampRangeFilter
-from framework.clients.feature_client import FeatureClientAsync
+from clients.feature_client import FeatureClientAsync
 from framework.concurrency import DeferredTasks
 from framework.logger.providers import get_logger
 from framework.serialization.utilities import serialize
@@ -22,15 +22,17 @@ class MfpErrorType:
 
 
 class MyFitnessPalService:
-    def __init__(self, container):
-        self.__client: MyFitnessPalClient = container.resolve(
-            MyFitnessPalClient)
-        self.__mfp_repository: MyFitnessPalRepository = container.resolve(
-            MyFitnessPalRepository)
-        self.__email_client: EmailGatewayClient = container.resolve(
-            EmailGatewayClient)
-        self.__feature_client: FeatureClientAsync = container.resolve(
-            FeatureClientAsync)
+    def __init__(
+        self,
+        client: MyFitnessPalClient,
+        mfp_repository: MyFitnessPalRepository,
+        email_client: EmailGatewayClient,
+        feature_client: FeatureClientAsync,
+    ):
+        self.__client = client
+        self.__mfp_repository = mfp_repository
+        self.__email_client = email_client
+        self.__feature_client = feature_client
         self.__date_util = MfpDateUtility()
 
         self.__credential_refresh_error = False

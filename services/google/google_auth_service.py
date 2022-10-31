@@ -9,13 +9,17 @@ from framework.logger.providers import get_logger
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 
+from services.fitindex.fitindex_service import FitIndexService
+
 logger = get_logger(__name__)
 
 
 class GoogleAuthService:
-    def __init__(self, container):
-        self.__repository: GoogleAuthRepository = container.resolve(
-            GoogleAuthRepository)
+    def __init__(
+        self,
+        repository: GoogleAuthRepository
+    ):
+        self.__repository = repository
 
     async def get_credentials(
         self,

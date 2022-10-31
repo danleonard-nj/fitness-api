@@ -10,8 +10,10 @@ logger = get_logger(__name__)
 
 
 class IdentityClient:
-    def __init__(self, container=None):
-        configuration = container.resolve(Configuration)
+    def __init__(
+        self,
+        configuration: Configuration
+    ):
         not_none(configuration, 'configuration')
 
         self.ad_auth: AzureAdConfiguration = configuration.ad_auth

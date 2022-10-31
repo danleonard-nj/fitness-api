@@ -10,7 +10,7 @@ from domain.google import (FitAggregateDataset, GoogleFitDataPoint,
                            GoogleFitDataSource, GoogleFitDataType,
                            GoogleFitRequest, GoogleFitValueType)
 from domain.mongo import TimestampRangeFilter
-from framework.clients.feature_client import FeatureClientAsync
+from clients.feature_client import FeatureClientAsync
 from framework.concurrency import DeferredTasks
 from framework.logger.providers import get_logger
 
@@ -26,17 +26,19 @@ def where(items, func):
 
 
 class GoogleFitService:
-    def __init__(self, container):
-        self.__client: GoogleFitClient = container.resolve(
-            GoogleFitClient)
-        self.__steps_repository: GoogleFitStepsRepository = container.resolve(
-            GoogleFitStepsRepository)
-        self.__calories_repository: GoogleFitCaloriesRepository = container.resolve(
-            GoogleFitCaloriesRepository)
-        self.__minutes_repository: GoogleFitMinutesRepository = container.resolve(
-            GoogleFitMinutesRepository)
-        self.__feature_client: FeatureClientAsync = container.resolve(
-            FeatureClientAsync)
+    def __init__(
+        self,
+        client: GoogleFitClient,
+        steps_repository: GoogleFitStepsRepository,
+        calories_repository: GoogleFitCaloriesRepository,
+        minutes_repository: GoogleFitMinutesRepository,
+        feature_client: FeatureClientAsync
+    ):
+        self.__client = client
+        self.__steps_repository = steps_repository
+        self.__calories_repository = calories_repository
+        self.__minutes_repository = minutes_repository
+        self.__feature_client = feature_client
 
     async def upsert_calories(
         self,
